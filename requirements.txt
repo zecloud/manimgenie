@@ -1,0 +1,5 @@
+chainlit
+langchain
+langchain-openai
+langchain-community
+azure-identity
