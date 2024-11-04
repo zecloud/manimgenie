@@ -1,0 +1,16 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "name": "Python: Chainlit",
+        "type": "python",
+        "request": "launch",
+        "module": "chainlit",
+        "args": [
+          "run",
+          "${file}"
+        ],
+        "jinja": true
+      }
+    ]
+  }

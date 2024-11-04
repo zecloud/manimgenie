@@ -4,7 +4,7 @@ from langchain.schema import StrOutputParser
 from manimgenie.sessionpythonrepltool import SessionsPythonREPLTool,CodeBlock,extract_markdown_code_blocks
 import os
 import chainlit as cl
-
+import re
 
 
 apikey=os.getenv("AZUREOPENAIAPIKEY")
@@ -28,6 +28,7 @@ async def on_chat_start():#
                            Create python code to generate a video with manim that explains the following question: \n
                            {question}
                            Remember ShowCreation() is deprecated, replace it with Create() \n
+                           Passing Mobject methods to Scene.play is no longer supported. Use Mobject.animate instead \n
                             \n\n
                             Respond only with the code """)
     
@@ -48,13 +49,14 @@ async def on_message(message: cl.Message):
     codeblock=codeblock[0]
     await exec_step(codeblock)
 
-@cl.step("Python Execution")
+@cl.step(name="Python_Execution")
 async def exec_step(codeblock:CodeBlock):
-    promptextract = PromptTemplate(input_variables=["manimcode"], template= """Extract the name of the scene from the following code: \n
-    {manimcode} \n 
-    respond only with the name of the scene""")
-    Scenename =await  (promptextract  | model|StrOutputParser()).ainvoke({"manimcode":codeblock.code})
-    await cl.Message(content="Creating Video for "+Scenename).send()
+     # Utiliser une expression régulière pour extraire le nom de la scène
+    match = re.search(r'class\s+(\w+)', codeblock.code)
+    if match:
+        Scenename = match.group(1)
+    else:
+        return "No class name found in the code"
     pool_management_endpoint=sessionpoolurl
     repl = SessionsPythonREPLTool(pool_management_endpoint=pool_management_endpoint)
 
