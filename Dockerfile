@@ -17,4 +17,4 @@ RUN pip3 install -r requirements.txt
 
 EXPOSE 8000
 
-CMD ["python", "-m", "chainlit", "run", "app.py", "-h"]
+CMD ["python", "-m", "chainlit", "run", "app.py", "-h","--host","0.0.0.0"]
