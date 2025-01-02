@@ -235,7 +235,12 @@ class SessionsPythonREPLTool(BaseTool):
         response_json = response.json()
         return response_json
 
-    def _run(self, python_code: str,scene_name:str, **kwargs: Any) -> Tuple[str, dict]:
+    def _run(self, python_code: str, **kwargs: Any) -> Tuple[str, dict]:
+        match = re.search(r'class\s+(\w+)', python_code)
+        if match:
+            scene_name = match.group(1)
+        else:
+            return "No class name found in the code"
         if(self.createfile(python_code,scene_name)):
             response = self.execute(scene_name)
         else:
