@@ -13,7 +13,7 @@ azure_deployment_name =os.environ.get('AZDEPLOYMENT_NAME')
 BASE_URL = "https://"+azure_resource_name+".openai.azure.com"
 model = AzureChatOpenAI(streaming=False,
                                 azure_endpoint=BASE_URL,
-    openai_api_version="2024-10-01-preview",
+    openai_api_version="2024-12-01-preview",
     deployment_name=azure_deployment_name,
     openai_api_key=apikey,temperature=1)
 
