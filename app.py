@@ -30,7 +30,7 @@ async def on_chat_start():#
                            Remember ShowCreation() is deprecated, replace it with Create() \n
                            Passing Mobject methods to Scene.play is no longer supported. Use Mobject.animate instead \n
                             \n\n
-                            Respond only with the code """)
+                            Respond only with the code in a markdown block""")
     
 
    
