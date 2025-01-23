@@ -24,6 +24,11 @@ AZDEPLOYMENT_NAME=your_azure_deployment_name
 AZSESSIONPOOLURL=your_session_pool_url
 ```
 
+## Azure Container App Session Pool Docker Image
+It uses Azure Container App Session Pool the docker image is on this repo forked from original Manim Community Image
+[Docker image](https://github.com/zecloud/manim)
+You can use the Docker image with or without Azure Container App Session Pool
+
 ## Usage
 Set up your environment variables
 Start the Chainlit application:
@@ -36,7 +41,8 @@ User submits a question through the Chainlit interface
 Azure OpenAI generates Manim code
 Code is executed in a Python REPL session
 Generated video is downloaded and displayed in the chat
-Project Structure
+
+### Project Structure
 app.py: Main application file
 requirements.txt: Project dependencies
 .env: Environment variables configuration
